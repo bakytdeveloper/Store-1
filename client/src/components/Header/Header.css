@@ -1,0 +1,51 @@
+/* Header.css */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 20px;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-section h1 {
+    margin: 0;
+    color: #3498db;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 20px;
+    color: #3498db;
+}
+
+.phone-number {
+    font-size: 16px;
+    color: #2c3e50;
+}
+
+.more-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin-left: 20px;
+}
+
+.search-bar input {
+    width: 20%;
+    padding: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+}

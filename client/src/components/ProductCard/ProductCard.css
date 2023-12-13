@@ -1,0 +1,111 @@
+
+/*!* ProductCard.css *!*/
+
+/*.product-card {*/
+/*    background-color: #ecf0f1;*/
+/*    border: 1px solid #bdc3c7;*/
+/*    border-radius: 8px;*/
+/*    margin: 1rem;*/
+/*    padding: 1rem;*/
+/*    width: 25%; !* 3 колонки на экране, занимают 75% ширины *!*/
+/*    box-sizing: border-box;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*    transition: transform 0.3s ease-in-out;*/
+/*    height: 370px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.product-card:hover {*/
+/*    transform: scale(1.01);*/
+/*}*/
+
+/*.product-image {*/
+/*    width: 65%;*/
+/*    height: auto;*/
+/*    border-radius: 4px;*/
+/*    margin-bottom: 0.5rem;*/
+/*    max-height: 65%; !* Ограничиваем высоту картинки до 65% высоты карточки *!*/
+/*}*/
+
+/*.product-details {*/
+/*    flex-grow: 1; !* Растягиваем внутренний контейнер, чтобы занимал всю доступную высоту *!*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: space-between; !* Равномерно распределяем пространство между элементами *!*/
+/*}*/
+
+/*.product-name {*/
+/*    color: #2c3e50;*/
+/*    margin-bottom: 0.5rem;*/
+/*}*/
+
+/*.product-description {*/
+/*    color: #7f8c8d;*/
+/*    margin-bottom: 0.5rem;*/
+/*}*/
+
+/*.product-price {*/
+/*    color: #3498db;*/
+/*    font-weight: bold;*/
+/*    margin-top: 0.5rem; !* Добавляем небольшой отступ сверху *!*/
+/*}*/
+
+
+/* ProductCard.css */
+
+.product-card {
+    background-color: #ecf0f1;
+    border: 1px solid #bdc3c7;
+    border-radius: 8px;
+    margin: 1rem;
+    padding: 1rem;
+    width: 75%; /* Используем 75% ширины */
+    max-width: 300px; /* Но не более 300px */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    height: 370px; /* Высота 370px */
+}
+
+.product-card:hover {
+    transform: scale(1.01);
+}
+
+.product-image {
+    width: 100%;
+    height: 65%; /* Высота 65% от общей высоты карточки */
+    object-fit: cover; /* Заполнение изображения */
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+}
+
+.product-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.product-description {
+    color: #7f8c8d;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    color: #3498db;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    .product-card {
+        width: 100%; /* На маленьких экранах 100% ширины */
+        max-width: none; /* Без максимальной ширины */
+    }
+}
