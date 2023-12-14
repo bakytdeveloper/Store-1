@@ -49,12 +49,93 @@
 //
 //
 
+//  РАБОЧИЙ КОД
+// import React, { useState, useEffect } from 'react';
+// // import axios from 'axios';
+// import ProductCard from './../ProductCard/ProductCard';
+// import './ProductList.css';
+// import Sidebar from "./../Sidebar/Sidebar";
+// import Modal from "../Modal/Modal";
+//
+// function ProductList({ searchKeyword }) {
+//     const [products, setProducts] = useState([]);
+//     const [loading, setLoading] = useState(true);
+//     const [error, setError] = useState(null);
+//     const [selectedType, setSelectedType] = useState(null);
+//     const [selectedProduct, setSelectedProduct] = useState(null);
+//
+//     useEffect(() => {
+//         const fetchProducts = async () => {
+//             try {
+//                 let url = 'http://localhost:5500/api/products';
+//
+//                 if (selectedType) {
+//                     url += `?type=${selectedType}`;
+//                 }
+//
+//                 const response = await fetch(url);
+//                 const data = await response.json();
+//                 setProducts(data);
+//             } catch (error) {
+//                 console.error('Error fetching products:', error);
+//             }
+//         };
+//
+//         fetchProducts();
+//     }, [selectedType]);
+//
+//
+//     const handleTypeSelect = (type) => {
+//         setSelectedType(type);
+//     };
+//
+//     const handleProductClick = (product) => {
+//         setSelectedProduct(product);
+//     };
+//
+//     const handleModalClose = () => {
+//         setSelectedProduct(null);
+//     };
+//
+//     const filteredProducts = products
+//         .filter((product) => !selectedType || product.type === selectedType)
+//         .filter((product) =>
+//             searchKeyword
+//                 ? product.name.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+//                 product.description.toLowerCase().includes(searchKeyword.toLowerCase())
+//                 : true
+//         );
+//
+//     if (error) {
+//         return <p>Error: {error}</p>;
+//     }
+//
+//     return (
+//
+//         <div className="product-list">
+//             <Sidebar onTypeSelect={handleTypeSelect} />
+//             {filteredProducts.map((product) => (
+//                 <ProductCard
+//                     key={product._id}
+//                     product={product}
+//                     onClick={() => handleProductClick(product)}
+//                 />
+//             ))}
+//             <Modal isOpen={isModalOpen} onClose={closeModal} product={selectedProduct} />
+//
+//         </div>
+//     );
+// }
+//
+// export default ProductList;
+//
+//
 
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
 import ProductCard from './../ProductCard/ProductCard';
 import './ProductList.css';
 import Sidebar from "./../Sidebar/Sidebar";
+import Modal from "../Modal/Modal";
 
 function ProductList({ searchKeyword }) {
     const [products, setProducts] = useState([]);
@@ -83,7 +164,6 @@ function ProductList({ searchKeyword }) {
         fetchProducts();
     }, [selectedType]);
 
-
     const handleTypeSelect = (type) => {
         setSelectedType(type);
     };
@@ -92,9 +172,17 @@ function ProductList({ searchKeyword }) {
         setSelectedProduct(product);
     };
 
-    // const handleModalClose = () => {
-    //     setSelectedProduct(null);
-    // };
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const openModal = (product) => {
+        setSelectedProduct(product);
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setSelectedProduct(null);
+        setModalOpen(false);
+    };
 
     const filteredProducts = products
         .filter((product) => !selectedType || product.type === selectedType)
@@ -110,16 +198,16 @@ function ProductList({ searchKeyword }) {
     }
 
     return (
-
         <div className="product-list">
             <Sidebar onTypeSelect={handleTypeSelect} />
             {filteredProducts.map((product) => (
                 <ProductCard
                     key={product._id}
                     product={product}
-                    onClick={() => handleProductClick(product)}
+                    onClick={() => openModal(product)}
                 />
             ))}
+            <Modal isOpen={isModalOpen} onClose={closeModal} product={selectedProduct} />
         </div>
     );
 }
