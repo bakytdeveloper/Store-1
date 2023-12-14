@@ -1,32 +1,48 @@
-// // Modal.js
-// import React from 'react';
+// //   Modal.js
+//
+// import React, {useState} from 'react';
 // import ReactDOM from 'react-dom';
 // import './Modal.css';
 //
 // const Modal = ({ isOpen, onClose, product }) => {
-//     if (!isOpen) return null;
+//
+//     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+//
+//     if (!isOpen || !product) {
+//         return null;
+//     };
+//
+//     const handleImageClick = (index) => {
+//         setSelectedImageIndex(index);
+//     };
 //
 //     return ReactDOM.createPortal(
 //         <div className="modal-overlay">
-//             <div className="modal-content">
+//             <div className="modal">
 //                 <button className="close-button" onClick={onClose}>
 //                     &times;
 //                 </button>
 //                 <h2>{product.name}</h2>
+//                 <div className="trio">
 //                 <div className="images">
-//                     {/* Место для маленьких изображений */}
+//                     <div className="small-images-column">
 //                     {product.images.map((image, index) => (
 //                         <img
 //                             key={index}
-//                             src={image}
+//                             src={image.url}
 //                             alt={`Image ${index}`}
 //                             className="small-image"
 //                         />
 //                     ))}
-//                     {/* Основное изображение */}
-//                     <img src={product.images[0]} alt="Main" className="main-image" />
+//                     </div>
+//                     <img src={product.images[0].url} alt="Main" className="main-image" />
 //                 </div>
-//                 <p>{product.description}</p>
+//                 <div className="description-column">
+//                     <p>{product.description}</p>
+//                 </div>
+//
+//                 </div>
+//
 //                 <table className="characteristics-table">
 //                     <thead>
 //                     <tr>
@@ -34,35 +50,48 @@
 //                         <th>Значение</th>
 //                     </tr>
 //                     </thead>
+//                     {/*<tbody>*/}
+//                     {/*{Object.entries(product.specifications).map(([key, value], index) => (*/}
+//                     {/*    <tr key={index}>*/}
+//                     {/*        <td>{key}</td>*/}
+//                     {/*        <td>{value.value}</td>*/}
+//                     {/*    </tr>*/}
+//                     {/*))}*/}
+//                     {/*</tbody>*/}
 //                     <tbody>
-//                     {Object.entries(product.specifications).map(([key, value], index) => (
+//                     {product.specifications.map((specification, index) => (
 //                         <tr key={index}>
-//                             <td>{key}</td>
-//                             <td>{value}</td>
+//                             <td>{specification.key}</td>
+//                             <td>{specification.value}</td>
 //                         </tr>
 //                     ))}
 //                     </tbody>
 //                 </table>
 //             </div>
 //         </div>,
-//         document.getElementById('modal-root')
+//
+//     document.body
 //     );
 // };
 //
 // export default Modal;
+//   Modal.js
 
-
-
-
-
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
 
 const Modal = ({ isOpen, onClose, product }) => {
+
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
     if (!isOpen || !product) {
         return null;
-    }
+    };
+
+    const handleImageClick = (index) => {
+        setSelectedImageIndex(index);
+    };
 
     return ReactDOM.createPortal(
         <div className="modal-overlay">
@@ -79,11 +108,12 @@ const Modal = ({ isOpen, onClose, product }) => {
                             key={index}
                             src={image.url}
                             alt={`Image ${index}`}
-                            className="small-image"
+                            className={`small-image ${index === selectedImageIndex ? 'selected' : ''}`}
+                            onClick={() => handleImageClick(index)}
                         />
                     ))}
                     </div>
-                    <img src={product.images[0].url} alt="Main" className="main-image" />
+                    <img src={product.images[selectedImageIndex].url} alt="Main" className="main-image" />
                 </div>
                 <div className="description-column">
                     <p>{product.description}</p>
