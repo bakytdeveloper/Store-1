@@ -29,8 +29,9 @@ import React, {useState} from "react";
 import Header from "./components/Header/Header";
 // import Sidebar from "./components/Sidebar/Sidebar";
 import ProductList from "./components/ProductList/ProductList";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import AdminPanel from "./components/AdminPanel/AdminPanel";
 
 
 
@@ -44,14 +45,21 @@ function App() {
 
     return (
         <Router>
+            <Switch>
         <div>
             <Header onSearch={handleSearch} />
             <div style={{ display: 'flex' }}>
+
+                <Route path="/nurlan_admin" exact>
+                    <AdminPanel />
+                </Route>
+
                 <Route path="/" exact>
                 <ProductList selectedType={selectedType} searchKeyword={searchKeyword}  />
                 </Route>
             </div>
         </div>
+            </Switch>
         </Router>
     );
 }
