@@ -2,7 +2,7 @@ import React from 'react';
 import './ProductCard.css';
 
 function ProductCard({ product }) {
-    const { name, description, price, images, specifications } = product;
+    const { name, description, price, images, type, specifications } = product;
 
     return (
         <div className="product-card">

@@ -1,25 +1,64 @@
-import React from "react";
-
-
-
-import './App.css';
+// import React, {useState} from "react";
+// import Header from "./components/Header/Header";
+// import Sidebar from "./components/Sidebar/Sidebar";
+// import ProductList from "./components/ProductList/ProductList";
+// import './App.css';
+//
+//
+//
+// function App() {
+//     const [selectedType, setSelectedType] = useState(null);
+//
+//     return (
+//         <div>
+//             <Header />
+//             <div style={{ display: 'flex' }}>
+//                 <Sidebar onSelectType={setSelectedType} />
+//                 <ProductList selectedType={selectedType} />
+//             </div>
+//         </div>
+//     );
+// }
+//
+//
+// export default App;
+//
+//
+//
+import React, {useState} from "react";
 import Header from "./components/Header/Header";
-import Sidebar from "./components/Sidebar/Sidebar";
+// import Sidebar from "./components/Sidebar/Sidebar";
 import ProductList from "./components/ProductList/ProductList";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import './App.css';
+
+
 
 function App() {
-  return (
-    <div className="app">
-     <Header />
-     <div className="main-content">
-       <Sidebar />
-       <ProductList />
-     </div>
-    </div>
-  );
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const [selectedType, setSelectedType] = useState('');
+
+    const handleSearch = (keyword) => {
+        setSearchKeyword(keyword);
+    };
+
+    return (
+        <Router>
+        <div>
+            <Header onSearch={handleSearch} />
+            <div style={{ display: 'flex' }}>
+                <Route path="/" exact>
+                <ProductList selectedType={selectedType} searchKeyword={searchKeyword}  />
+                </Route>
+            </div>
+        </div>
+        </Router>
+    );
 }
 
+
 export default App;
+
 
 
 
